@@ -5,6 +5,8 @@ public class Events extends Task {
     public Events(String description, String at) {
         super(description);
         this.at = at;
+        super.taskType = "E";
+        super.date = at;
     }
 
     @Override
