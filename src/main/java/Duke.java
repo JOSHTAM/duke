@@ -25,8 +25,33 @@ public class Duke {
                 break;
             } else if (inputString.equals("list")) {
                 for (int i = 1; i <= list.size(); i++) {
-                    System.out.println(i + ". " + "[" + list.get(i - 1).getStatusIcon() + "] " + list.get(i - 1).getDesc());
+                    System.out.println(i + "." +list.get(i-1).toString());
                 }
+            }
+            else if (inputString.startsWith("deadline")){
+                int index = inputString.indexOf("/by");
+                String info = inputString.substring(9, index);
+                Deadlines deadlines = new Deadlines(info,inputString.split("/")[1].substring(3));
+                list.add(deadlines);
+                System.out.println("Got it. I've added this task: \n" +
+                         deadlines.toString()+"\n"+
+                        "Now you have " +list.size()+ " tasks in the list.");
+            }
+            else if (inputString.startsWith("event")){
+                int index = inputString.indexOf("/at");
+                String info = inputString.substring(6, index);
+                Events events = new Events(info,inputString.split("/")[1].substring(3));
+                list.add(events);
+                System.out.println("Got it. I've added this task: \n" +
+                        events.toString()+"\n"+
+                        "Now you have " +list.size()+ " tasks in the list.");
+            }
+            else if (inputString.startsWith("todo")){
+                Todo todo = new Todo(inputString.substring(5));
+                list.add(todo);
+                System.out.println("Got it. I've added this task: \n" +
+                        todo.toString()+"\n"+
+                        "Now you have " +list.size()+ " tasks in the list.");
             }
             else if (inputString.substring(0,4).equals("done")) {
                 int index = Integer.parseInt(inputString.substring(5));
