@@ -1,4 +1,6 @@
 import java.util.Scanner;
+//import java.util.ArrayList;
+//import java.util.Arrays;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,6 +13,9 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
 
+       // ArrayList<item> list = new ArrayList<>();
+
+
         while (true) {
             Scanner scanner = new Scanner(System.in);
             String inputString = scanner.nextLine();
@@ -21,6 +26,10 @@ public class Duke {
             } else {
                 System.out.println(inputString);
             }
+
+
+
+
         }
     }
 }
