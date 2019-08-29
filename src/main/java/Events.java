@@ -1,8 +1,10 @@
+import java.util.Date;
+
 public class Events extends Task {
 
-    protected String at;
+    protected Date at;
 
-    public Events(String description, String at) {
+    public Events(String description, Date at) {
         super(description);
         this.at = at;
         super.taskType = "E";

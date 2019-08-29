@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -7,6 +8,7 @@ import java.util.Objects;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.ArrayIndexOutOfBoundsException;
+import java.text.ParseException;
 
 public class Duke {
 
@@ -27,11 +29,13 @@ public class Duke {
                 stat = (input[1].equals("1"));
 
                 if (taskType.equals("D")) {
-                    Deadlines deadline = new Deadlines(input[2], input[3]); //info, by
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
+                    Deadlines deadline = new Deadlines(input[2], dateFormat.parse(input[3])); //info, by
                     deadline.isDone = (stat.equals("\\u2713")) ? true : false;
                     list.add(deadline);
                 } else if (taskType.equals("E")) {
-                    Events event = new Events(input[2], input[3]); //info, by
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
+                    Events event = new Events(input[2], dateFormat.parse(input[3])); //info, by
                     event.isDone = (stat.equals("\\u2713")) ? true : false;
                     list.add(event);
                 } else if (taskType.equals("T")) {
@@ -44,7 +48,7 @@ public class Duke {
             }
             fileInput.close();
             return list;
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException|ParseException e) {
             System.err.println("File cannot be found");
             return null;
         }
@@ -107,14 +111,15 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
 
             ArrayList<Task> list = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
-
-        if (scanner.hasNextLine()) {
+        String path = "//Users//joshtamers//Desktop//GitHub//duke//src//main//java//Save";
+        File file = new File(path);
+        try{
+        Scanner scanner = new Scanner(file);
+        if (scanner.hasNext()) {
             list.addAll(Objects.requireNonNull(loadFile()));
         }
 
             while (true) {
-                try {
                     scanner = new Scanner(System.in);
                     String inputString = scanner.nextLine();
 
@@ -132,7 +137,8 @@ public class Duke {
                     else {
                         int index = inputString.indexOf("/by");
                         String info = inputString.substring(9, index);
-                        Deadlines deadlines = new Deadlines(info, inputString.split("/")[1].substring(3));
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
+                        Deadlines deadlines = new Deadlines(info, dateFormat.parse(inputString.split("/")[1].substring(3)));
                         list.add(deadlines);
                         System.out.println("Got it. I've added this task: \n" +
                                 deadlines.toString() + "\n" +
@@ -146,7 +152,8 @@ public class Duke {
                     else {
                         int index = inputString.indexOf("/at");
                         String info = inputString.substring(6, index);
-                        Events events = new Events(info, inputString.split("/")[1].substring(3));
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
+                        Events events = new Events(info,dateFormat.parse(inputString.split("/")[1].substring(3)));
                         list.add(events);
                         System.out.println("Got it. I've added this task: \n" +
                                 events.toString() + "\n" +
@@ -174,9 +181,10 @@ public class Duke {
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException e){
-                    System.err.println(e.getMessage());
-                }
+            }
+        }
+        catch (DukeException |  ParseException |FileNotFoundException e){
+            System.err.println(e.getMessage());
         }
 
     }

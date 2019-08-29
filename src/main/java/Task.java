@@ -1,8 +1,10 @@
+import java.util.Date;
+
 public class Task {
     protected String description;
     protected boolean isDone;
     protected String taskType;
-    protected String date;
+    protected Date date;
 
     public Task(String description) {
         this.description = description;
