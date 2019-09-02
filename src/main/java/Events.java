@@ -2,6 +2,7 @@ import java.util.Date;
 
 public class Events extends Task {
 
+    //protected String at;
     protected Date at;
 
     public Events(String description, Date at) {
@@ -15,4 +16,4 @@ public class Events extends Task {
     public String toString() {
         return "[E]"+ "[" +super.getStatusIcon()+ "] " + super.description + " (at: " + at + ")";
     }
-}
+} 
