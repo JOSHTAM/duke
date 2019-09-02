@@ -2,6 +2,7 @@ import java.util.Date;
 
 public class Deadlines extends Task {
 
+    //protected String by;
     protected Date by;
 
     public Deadlines(String description, Date by) {
