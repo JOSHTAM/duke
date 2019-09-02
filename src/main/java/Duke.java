@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.ArrayIndexOutOfBoundsException;
+import java.lang.String;
 
 public class Duke {
 
@@ -101,7 +102,19 @@ public class Duke {
         }
     }
 
-
+    public static void find (ArrayList<Task> list, String keyword) {
+        ArrayList<Task> tempArray = new ArrayList<>();
+        for (Task task : list) {
+            if (task.toString().contains(keyword)) {
+                tempArray.add(task);
+            }
+        }
+            //System.out.println(tempArray.size());
+            for (int i = 0; i < tempArray.size(); i++) {
+                System.out.println((i+1) + "." + tempArray.get(i).toString());
+            }
+            tempArray.clear();
+    }
 
 
     public static void main(String[] args) {
@@ -194,6 +207,11 @@ public class Duke {
                             "\n" + "Now you have " + (list.size()-1) + " tasks in the list.");
                     list.remove(index -1);
                     update(list);
+
+                } else if (inputString.substring(0, 4).equals("find")) {
+                    String keyword = inputString.substring(5);
+                    System.out.println("Here are the matching tasks in your list:");
+                    find(list, keyword);
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -203,7 +221,6 @@ public class Duke {
             }
         }
     }
-
 
 
 

@@ -8,7 +8,8 @@ public class Events extends Task {
     public Events(String description, Date at) {
         super(description);
         this.at = at;
-        super.taskType = "E";
+        //super.taskType = "E";
+        this.taskType = "E";
         super.date = at;
     }
 
