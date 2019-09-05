@@ -2,7 +2,6 @@ import java.util.Date;
 
 public class Deadlines extends Task {
 
-    //protected String by;
     protected Date by;
 
     public Deadlines(String description, Date by) {
@@ -10,6 +9,7 @@ public class Deadlines extends Task {
         this.by = by;
         this.taskType = "D";
         super.date = by;
+
     }
 
     @Override
