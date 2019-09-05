@@ -1,50 +1,33 @@
-import jdk.dynalink.linker.support.SimpleLinkRequest;
 import java.text.ParseException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.io.FileNotFoundException;
-import java.util.Objects;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.ArrayIndexOutOfBoundsException;
 import java.lang.String;
-import java.io.*;
-import java.io.IOException;
+
 
 public class Duke {
-    //private Storage storage;
-    //private TaskList tasks;
-    //private Ui ui;
-
     public static void main(String[] args) {
-        ArrayList<Task> tasks;
+
+        String absolutePath =  "//Users//joshtamers//Desktop//GitHub//duke//src//main//java//Save";
+        Ui ui = new Ui();
+        try {
+
         Storage file = new Storage();
+        TaskList tl = new TaskList();
         boolean isExit = false;
 
-    //String path = "//Users//joshtamers//Desktop//GitHub//duke//src//main//java//Save";
-    //public Duke(String filePath) {
-
-        Ui ui = new Ui();
         ui.showWelcome();
-        //String file = filePath;
-        //storage = new Storage(file);
-        try {
-            tasks = file.LoadFile();
-            //tasks = new TaskList(storage.loadFile());
+            tl.alt = tl.LoadFile();
             while(!isExit) {
                 ui.readCommand();
                 ui.showLine();
-                String command = ui.FullCommand.split(" ")[0];
+                System.out.println("");
+                String command = ui.FullCommand;
                 Command c = Parser.parse(command);
-                c.execute(tasks, ui, file);
+                c.execute(tl, ui, file);
+                ui.showLine();
                 isExit = c.isExit();
             }
         } catch (DukeException | ParseException | IOException | NullPointerException e) {
-            //ui.showLoadingError();
             if(e instanceof ParseException) {
-                //ui.showDateFormatError();
                 ui.showLoadingError();
             } else {
                 ui.showLoadingError();

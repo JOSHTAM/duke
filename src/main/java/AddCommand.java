@@ -23,7 +23,7 @@ public class AddCommand extends Command {
         else if (taskType.equals("deadline")) tasks.add(new Deadlines(description, datetime));
         else if (taskType.equals("event")) tasks.add(new Events(description, datetime));
         else throw new DukeException("add error");
-        tasks.saveFile(storage.get_file_path());
+        tasks.saveFile(tasks.get_file_path());
         return ui.showTaskAdded(tasks.get(tasks.size()-1).toString(), tasks.size());
     }
 

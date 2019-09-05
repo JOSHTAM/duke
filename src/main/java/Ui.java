@@ -4,7 +4,7 @@ public class Ui {
 
     protected String FullCommand;
 
-    Scanner inputString = new Scanner(System.in);
+
     private String line = " _________________________________________________________________________________ ";
 
     String logo = " ____        _        \n"
@@ -13,16 +13,16 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public String showWelcome() {
-        //System.out.println("Hello from\n" + logo);
-        //System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-        return "Hello from\n" + logo + "\n" + "Hello! I'm Duke\n" + "What can I do for you\n?";
+    public void showWelcome() {
+        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        //return "Hello from\n" + logo + "\n" + "Hello! I'm Duke\n" + "What can I do for you\n?";
     }
 
-    public String readCommand() {
+    public void readCommand() {
+        Scanner inputString = new Scanner(System.in);
         //scanner = new Scanner(System.in);
-        //String inputString = scanner.nextLine();
-        return inputString.nextLine();
+        FullCommand = inputString.nextLine();
     }
 
     public String bye() {
@@ -37,8 +37,7 @@ public class Ui {
 
     public String showTaskAdded(String task, int size) {
         String output = "Got it. I've added this task: \n" + task + "\n" + "Now you have " + Integer.toString(size) + " tasks in the list.";
-        //        events.toString() + "\n" +
-        //        "Now you have " + tasks.size() + " tasks in the list.");
+        System.out.println(output);
         return output;
     }
 

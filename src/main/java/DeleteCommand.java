@@ -17,12 +17,15 @@ public class DeleteCommand extends Command {
 
 
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(this.index >= tasks.size()) throw new DukeException("index error");
-        tasks.get(index - 1).changeStatus(false);
+        //if(this.index >= tasks.size()) throw new DukeException("index error");
+        tasks.alt.get(index - 1).changeStatus(false);
         String output = "Noted. I've removed this task: \n" +
-                tasks.get(index - 1).toString() +
-                "\n" + "Now you have " + (tasks.size()-1) + " tasks in the list.";
-        tasks.remove(index - 1);
+                tasks.alt.get(index - 1).toString() +
+                "\n" + "Now you have " + (tasks.alt.size()-1) + " tasks in the list.";
+        System.out.println("Noted. I've removed this task: \n" +
+                tasks.alt.get(index - 1).toString() +
+                "\n" + "Now you have " + (tasks.alt.size()-1) + " tasks in the list.");
+        tasks.alt.remove(index - 1);
         //tasks.saveFile(Task t, String taskType, String date);
         return output;
     }

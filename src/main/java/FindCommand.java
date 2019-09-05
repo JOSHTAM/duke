@@ -26,18 +26,20 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         //System.out.println("Here are the matching tasks in your list:");
-        if (!tasks.contains(keyword)) throw new DukeException("Could not be found.");
+
         String output = "";
+        System.out.println("Here are the matching tasks in your list: ");
         ArrayList<Task> tempArray = new ArrayList<>();
-        for (Task task : tasks) {
+        for (Task task : tasks.alt) {
+           // if (!task.getDesc().contains(keyword)) throw new DukeException("Could not be found.");
             if (task.toString().contains(keyword)) {
                 tempArray.add(task);
             }
         }
         //System.out.println(tempArray.size());
         for (int i = 0; i < tempArray.size(); i++) {
-            //System.out.println((i+1) + "." + tempArray.get(i).toString());
-            output += (i+1) + "." +tempArray.get(i).toString() + "\n";
+            System.out.println((i+1) + "." + tempArray.get(i).toString());
+            //output += (i+1) + "." +tempArray.get(i).toString() + "\n";
         }
         tempArray.clear();
         //String output =
