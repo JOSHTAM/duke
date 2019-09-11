@@ -6,10 +6,18 @@ import java.util.ArrayList;
 import java.text.ParseException;
 import java.util.Scanner;
 
+
+/**
+ * Represents the task list that duke is handling
+ */
 public class TaskList extends ArrayList<Task> {
 
     String absolutePath = "//Users//joshtamers//Desktop//GitHub//duke//src//main//java//Save";
 
+    /**
+     * Saves the current file after the changes have been made
+     * @param absolutePath stores the storage path of the file
+     */
     public void saveFile(String absolutePath) {
         //String path = "//Users//joshtamers//Desktop//GitHub//duke//src//main//java//Save";
         File file = new File(absolutePath);
@@ -30,6 +38,12 @@ public class TaskList extends ArrayList<Task> {
 
     public ArrayList<Task> alt = new ArrayList<Task>();
 
+    /**
+     * Loads the file from the storage path of the file
+     * @return the list of items from the stored file
+     * @throws IOException
+     * @throws ParseException
+     */
     protected ArrayList<Task> LoadFile() throws IOException, ParseException {
         //ArrayList<Task> tasks = new ArrayList<Task>();
         SimpleDateFormat fmt = new SimpleDateFormat("MMM dd HH:mm:ss z yyyy");
@@ -68,7 +82,10 @@ public class TaskList extends ArrayList<Task> {
         return alt;
     }
 
-
+    /**
+     * Returns the file path where it is stored
+     * @return the path location
+     */
     public String get_file_path() {
         return absolutePath;
     }

@@ -19,7 +19,54 @@ import javafx.scene.image.ImageView;
 */
 
 //public class Duke extends Application {
+
+/**
+ * The Duke program implements an application that currently takes in commands of a task manager (todo,list,deadline,event,done,delete,find,bye)
+ * followed by inputs that follows the command such as (int, days, dates) that are stored as data in a text file, and displays information
+ * based on the commands to the standard output.
+ *
+ * @author joshtamers
+ * @version 1.0
+ * @since 2019-08-12
+ */
+
 public class Duke {
+    /**
+     * Creates new Ui,Storage and taskList, to read in commands and execute them to a saved file
+     * @param args argument to be passed into main
+     */
+
+    public static void main(String[] args) {
+        String absolutePath =  "//Users//joshtamers//Desktop//GitHub//duke//src//main//java//Save";
+        Ui ui = new Ui();
+        try {
+
+            Storage file = new Storage();
+            TaskList tl = new TaskList();
+            boolean isExit = false;
+
+            ui.showWelcome();
+            tl.alt = tl.LoadFile();
+            while(!isExit) {
+                ui.readCommand();
+                ui.showLine();
+                System.out.println("");
+                String command = ui.FullCommand;
+                Command c = Parser.parse(command);
+                c.execute(tl, ui, file);
+                ui.showLine();
+                isExit = c.isExit();
+            }
+        } catch (DukeException | ParseException | IOException | NullPointerException e) {
+            if(e instanceof ParseException) {
+                ui.showLoadingError();
+            } else {
+                ui.showLoadingError();
+            }
+        } finally {
+            ui.showLine();
+        }
+    }
 
     /*
 
@@ -145,42 +192,6 @@ public class Duke {
         return "Duke heard: " + input;
     }
     */
-
-
-    public static void main(String[] args) {
-
-        String absolutePath =  "//Users//joshtamers//Desktop//GitHub//duke//src//main//java//Save";
-        Ui ui = new Ui();
-        try {
-
-        Storage file = new Storage();
-        TaskList tl = new TaskList();
-        boolean isExit = false;
-
-        ui.showWelcome();
-            tl.alt = tl.LoadFile();
-            while(!isExit) {
-                ui.readCommand();
-                ui.showLine();
-                System.out.println("");
-                String command = ui.FullCommand;
-                Command c = Parser.parse(command);
-                c.execute(tl, ui, file);
-                ui.showLine();
-                isExit = c.isExit();
-            }
-        } catch (DukeException | ParseException | IOException | NullPointerException e) {
-            if(e instanceof ParseException) {
-                ui.showLoadingError();
-            } else {
-                ui.showLoadingError();
-            }
-        } finally {
-            ui.showLine();
-        }
-    }
-
-
 
 }
 

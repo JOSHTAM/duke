@@ -1,8 +1,18 @@
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
+
+/**
+ * Represents a parser to make sense of the user input and translates it into commands for Duke
+ */
 public class Parser {
 
+    /**
+     * Takes in the user input and makes sense of it
+     * @param inputString takes in the input String
+     * @return Duke commands based on the user input
+     * @throws DukeException if there is any error
+     */
     public static Command parse(String inputString) throws DukeException {
         if (inputString.isBlank()) throw new DukeException("Input is blank");
         try {
